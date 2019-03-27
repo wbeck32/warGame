@@ -42,7 +42,7 @@ export default class Deck {
     const dealPile = this.cards;
     const numPlayers = this.numPlayers;
     let dealtArray = [...Array(numPlayers)];
-    dealtArray.map((u, idx) => { dealtArray[idx] = [idx]; });
+    dealtArray.map((u, idx) => { dealtArray[idx] = []; });
     dealPile.reduce((a, v, i) => {
       let modu = i % numPlayers;
       dealtArray[modu].push(v);

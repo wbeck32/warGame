@@ -20,11 +20,10 @@
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "test:watch:nodemon": "nodemon --watch lib --watch tests --exec 'npm test'",
-    "test:watch": "npm test -- -w",
+    "watch:build:test": "nodemon --watch src --watch tests --exec 'npm run build & npm run test'",
     "build": "babel src -d lib",
     "test": "mocha tests --require @babel/register",
-    "start": "nodemon ./lib/index.js"
+    "start": "npm run watch:build:test"
   },
   "author": "Wendy Beck",
   "license": "ISC"

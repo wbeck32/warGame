@@ -4,49 +4,48 @@ import War from '../lib/index'
 import Deck from '../lib/Deck'
 
 
-describe('ha', () => {
-
-
-
-  describe('game test', () => {
-    it('should compare card values correctly', () => {
-      let myWar = new War(2)
-
-      const cards = myWar.play()
-      assert.ok(cards)
-    })
-    it('should', () => {
-
-    })
-    it('should', () => {
-
-    })
+describe('game test', () => {
+  it('should compare card values correctly', () => {
+    let testWar = new War(3).play()
+    // console.log(testWar)
   })
-  describe('deck test', () => {
-    it('should shuffle thoroughly', () => {
-      let myDeck = new Deck(3).deal()
+  it('should', () => {
 
-    })
-    it('should deal cards evenly', () => {
-
-    })
-    it('should', () => {
-
-    })
-
-    it('should', () => {
-
-    })
-    it('should', () => {
-
-    })
   })
-  describe('card test', () => {
+  it('should', () => {
 
-    it('should', () => {
-    })
-    it('should', () => {
+  })
+})
+describe('deck test', () => {
+  it('should shuffle thoroughly', () => {
+    let testDeck = new Deck(3).deal()
 
-    })
+  })
+  it('should deal cards correctly for two players', () => {
+    let testDeck = new Deck(2)
+    const cards = testDeck.deal()
+    assert.equal(cards[0].length, 26)
+  })
+  it('should deal cards correctly for three players', () => {
+    let testDeck = new Deck(3)
+    const cards = testDeck.deal()
+    assert.equal(cards[0].length, 18)
+    assert.equal(cards[1].length, 17)
+    assert.equal(cards[2].length, 17)
+  })
+
+  it('should', () => {
+
+  })
+  it('should', () => {
+
+  })
+})
+describe('card test', () => {
+
+  it('should', () => {
+  })
+  it('should', () => {
+
   })
 })

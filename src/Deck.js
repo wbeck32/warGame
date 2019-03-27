@@ -61,4 +61,4 @@ export default class Deck {
     }, 0);
     this.cards = cards;
   }
-};
+}

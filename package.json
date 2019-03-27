@@ -1,0 +1,32 @@
+{
+  "name": "nweacodetest",
+  "version": "1.0.0",
+  "description": "NWEA code test",
+  "main": "cardsWithoutSymbols.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "dependencies": {
+    "jslint": "^0.12.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2",
+    "nodemon": "^1.18.10"
+  },
+  "scripts": {
+    "test:watch:nodemon": "nodemon --watch lib --watch tests --exec 'npm test'",
+    "test:watch": "npm test -- -w",
+    "build": "babel src -d lib",
+    "test": "mocha tests --require @babel/register",
+    "start": "nodemon ./lib/index.js"
+  },
+  "author": "Wendy Beck",
+  "license": "ISC"
+}

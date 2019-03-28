@@ -1,8 +1,4 @@
-const ACE = 'A'
-const JACK = 'J'
-const QUEEN = 'Q'
-const KING = 'K'
-let ranks = [ACE, 2, 3, 4, 5, 6, 7, 8, 9, 10, JACK, QUEEN, KING];
+let ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 let suits = ['hearts', 'spades', 'clubs', 'diamonds']
 
 class Card {

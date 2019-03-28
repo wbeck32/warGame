@@ -1,28 +1,35 @@
-let ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-let suits = ['hearts', 'spades', 'clubs', 'diamonds']
+/* eslint-disable no-console */
 
 class Card {
-  constructor() {
+  constructor(ranksArray, suitsArray) {
     this.card = [];
+    this.ranks = ranksArray;
+    this.suits = suitsArray;
   }
-  makeCard(rank) {
+  makeCard() {
     let card = this.card;
-    suits.reduce((a, v) => {
-      return card.push([v, ranks[rank]])
-    }, 0)
-    return card
+    let ranks = this.ranksArray.length;
+    let suits = this.suitsArray.length;
+    suits.reduce((a, v, i) => {
+      console.log(a, v, i);
+      return card.push([ranks, suits]);
+    }, 0);
+    return card;
   }
 }
 
 export default class Deck {
-  constructor(numPlayers) {
+  constructor(numPlayers, numRanks, numSuits) {
     this.cards = [];
     this.numPlayers = numPlayers;
+    this.numRanks = numRanks;
+    this.numSuits = numSuits;
   }
   shuffle() {
     let shuffled = this.cards;
     let currentIndex = shuffled.length;
-    let temporaryValue, randomIndex;
+    let temporaryValue;
+    let randomIndex;
     while (0 !== currentIndex) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
@@ -45,10 +52,12 @@ export default class Deck {
     }, 0);
     return dealtArray;
   }
-  createDeck() {
+  createDeck(numRanks, numSuits) {
     let cards = this.cards;
-    ranks.reduce((a, v, i) => {
-      let c = new Card();
+    const ranksArray = [...Array(numRanks).keys()];
+    const suitsArray = [...Array(numSuits).keys()];
+    ranksArray.reduce((a, v, i) => {
+      let c = new Card(ranksArray, suitsArray);
       let card = c.makeCard(i);
       card.forEach((ele) => {
         cards.push(ele);

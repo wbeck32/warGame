@@ -5,22 +5,34 @@ module.exports = {
   },
   "extends": "eslint:recommended",
   "parser": "babel-eslint",
+  "rules": {
+    "strict": 0
+  },
+  "overrides": [{ "files": ["./lib/*", "./test/*"] }],
   "parserOptions": {
     "allowImportExportEverywhere": true,
     "ecmaVersion": 6,
     "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "rules": {
     "class-methods-use-this": ["error"],
-    "comma-dangle": ["error", {
-      "arrays": "never",
-      "objects": "always",
-    }],
+    "no-const-assign": "error",
     "no-mixed-spaces-and-tabs": "error",
+    "no-undefined": "error",
     "no-useless-return": "error",
-    "object-curly-newline": ["error", "always"],
+    "no-var": "error",
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "function" },
+    ],
+    "prefer-arrow-callback": "error",
+    "prefer-const": "error",
+    "prefer-destructuring": ["error"],
     "semi": ["error", "always"],
     "sort-imports": "error",
-    "strict": ["error", "global"],
+    "strict": ["error", { "impliedStrict": true }],
   }
 };

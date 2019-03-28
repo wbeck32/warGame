@@ -3,17 +3,13 @@
 class Card {
   constructor(ranksArray, suitsArray) {
     this.card = [];
-    this.ranks = ranksArray;
-    this.suits = suitsArray;
+    this.ranks = ranksArray.length;
+    this.suits = suitsArray.length;
   }
+
   makeCard() {
-    let card = this.card;
-    let ranks = this.ranksArray.length;
-    let suits = this.suitsArray.length;
-    suits.reduce((a, v, i) => {
-      console.log(a, v, i);
-      return card.push([ranks, suits]);
-    }, 0);
+    const { card, ranks, suits } = this;
+    console.log(ranks, suits);
     return card;
   }
 }
@@ -26,7 +22,7 @@ export default class Deck {
     this.numSuits = numSuits;
   }
   shuffle() {
-    let shuffled = this.cards;
+    const shuffled = this.cards;
     let currentIndex = shuffled.length;
     let temporaryValue;
     let randomIndex;
@@ -39,31 +35,29 @@ export default class Deck {
     }
     this.cards = shuffled;
   }
+
   deal() {
     this.createDeck();
     this.shuffle();
     const dealPile = this.cards;
-    const numPlayers = this.numPlayers;
-    let dealtArray = [...Array(numPlayers)];
+    const { numPlayers } = this;
+    const dealtArray = [...Array(numPlayers)];
     dealtArray.map((u, idx) => { dealtArray[idx] = []; });
     dealPile.reduce((a, v, i) => {
-      let modu = i % numPlayers;
+      const modu = i % numPlayers;
       dealtArray[modu].push(v);
     }, 0);
     return dealtArray;
   }
+
   createDeck(numRanks, numSuits) {
-    let cards = this.cards;
-    const ranksArray = [...Array(numRanks).keys()];
-    const suitsArray = [...Array(numSuits).keys()];
-    ranksArray.reduce((a, v, i) => {
-      let c = new Card(ranksArray, suitsArray);
-      let card = c.makeCard(i);
-      card.forEach((ele) => {
-        cards.push(ele);
-      });
-      return cards;
-    }, 0);
+    const { cards } = this;
+    console.log(cards, numRanks, numSuits);
+    const c = new Card(numRanks, numSuits);
+    const card = c.makeCard();
+    card.forEach((ele) => {
+      cards.push(ele);
+    });
     this.cards = cards;
   }
 }

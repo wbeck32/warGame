@@ -7,19 +7,19 @@ export default class War {
     this.numRanks = numRanks;
     this.numSuits = numSuits;
   }
+
   play() {
-    let numPlayers = this.numPlayers;
-    let numRanks = this.numRanks;
-    let numSuits = this.numSuits;
+    const { numPlayers, numRanks, numSuits } = this;
     let thisHand = {
       winningCard: [],
       winningPlayer: 0,
       round: 1,
     };
+
     return new Deck(numPlayers, numRanks, numSuits).deal()
       .map((u) => {
         let highestNumber = 0;
-        let round = thisHand.round;
+        let { round } = thisHand;
         console.log(thisHand.round);
         return u.reduce((a, ele, i) => {
           if (ele[1] > highestNumber) {
@@ -40,6 +40,7 @@ export default class War {
             };
             highestNumber;
           }
+
           return thisHand;
           // console.log(thisHand);
         }, 0);

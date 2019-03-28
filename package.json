@@ -1,27 +1,26 @@
 {
-  "name": "nweacodetest",
+  "name": "wargame",
   "version": "1.0.0",
-  "description": "NWEA code test",
+  "description": "Writing a version of the game war.",
   "main": "cardsWithoutSymbols.js",
   "directories": {
     "lib": "lib",
     "test": "tests"
   },
-  "devDependencies": {},
-  "dependencies": {
+  "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.4.0",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.2",
     "@babel/register": "^7.4.0",
     "chai": "^4.2.0",
-    "jslint": "^0.12.1",
     "mocha": "^6.0.2",
     "nodemon": "^1.18.10"
   },
+  "dependencies": {},
   "scripts": {
     "watch:build:test": "nodemon --watch src --watch tests --exec 'npm run build & npm run test'",
-    "build": "babel src -d lib",
+    "build": "./node_modules/.bin/babel src --out-dir lib",
     "test": "mocha tests --require @babel/register",
     "start": "npm run watch:build:test"
   },

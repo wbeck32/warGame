@@ -1,16 +1,17 @@
 /* eslint-disable no-console */
 
 class Card {
-  constructor(dealtCard, userId) {
+  constructor(dealtCard, handId, playerId) {
     this.card = {};
     this.dealtCard = dealtCard;
-    this.userId = userId;
+    this.handId = handId;
+    this.playerId = playerId;
   }
 
   makeCard() {
     let { card } = this;
-    const { dealtCard: { rank, suit }, userId } = this;
-    card = { rank, suit, userId };
+    const { dealtCard: { rank, suit }, handId, playerId } = this;
+    card = { handId, playerId, rank, suit };
     return card;
   }
 }
@@ -42,14 +43,15 @@ export default class Deck {
     const { numPlayers, numRanks, numSuits } = this;
     this.createDeck(numRanks, numSuits);
     this.shuffle();
-    const dealPile = this.deck;
-    const dealtArray = Array.from({ length: numPlayers }, (v, i) => i + 1);
-    dealtArray.map((u, idx) => { dealtArray[idx] = []; });
-    dealPile.reduce((a, v, i) => {
-      const userId = i % numPlayers;
-      dealtArray[userId].push(new Card(v, userId).makeCard());
-    }, 0);
-    return dealtArray;
+    const dealStack = this.deck;
+    const handsArray = [];
+    dealStack.forEach((ele, i) => {
+      const playerId = i % numPlayers;
+      const handId = i % numRanks;
+      handsArray.push(new Card(ele, handId, playerId).makeCard());
+    });
+    console.log('handsArray: ', handsArray);
+    return handsArray;
   }
 
   createDeck(numRanks, numSuits) {

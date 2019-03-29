@@ -4,12 +4,12 @@ import Deck from '../lib/Deck';
 import War from '../lib/index';
 
 
-describe.only('game test', () => {
+describe('game test', () => {
   it('should compare card values correctly', () => {
     const testWar = new War(3, 6, 3).play();
     // console.log(testWar)
   });
-  it('should create second war when two cards match in a round', () => {
+  it('should create second war when two cards match in a hand', () => {
     // const testWar = new War(3, 1, 1).play();
   });
 });
@@ -17,7 +17,6 @@ describe('deck test', () => {
   it('should shuffle thoroughly', () => {
     // const testDeck = new Deck(3, 6, 3).deal();
     // console.log('testDeck: ', testDeck);
-
   });
   it('should not allow too many ranks', () => {
 

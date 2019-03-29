@@ -27,21 +27,30 @@ export default class War {
     let highestNumber = 1;
     const currentPlayers = numPlayers;
     const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
-    const tmpArray = [];
-    gameDeck.reduce((a, v, i) => {
-      console.log(' v, i: ', v, i);
-      const tempId = v.handId;
-      const tmpArray = Array.from({ length: numRanks }, (x, i) => []);
-      tmpArray.forEach((ele, i) => {
-        if (v && v.handId === tempId) tmpArray[tempId].push(v);
-
-      });
-      console.log(tmpArray);
+    return;
+    gameDeck.forEach((v, i) => {
+      // console.log('====v====');
+      // console.log('v: ', v);
       const { playerId, rank, suit } = v;
       let { handId } = v;
 
-      // console.log('playerId, rank, suit, handId: ', playerId, rank, suit, handId);
+      if (v.playerId == 0) {
+        const hAZ = [v];
+        console.log('====hAZ====');
+        console.log('hAZ: ', hAZ);
+      }
+      if (v.playerId == 1) {
+        const hAO = [v];
+        console.log('====hAO====');
+        console.log('hAO: ', hAO);
+      }
+      if (v.playerId == 2) {
+        const hAT = [v];
+        console.log('====hAT====');
+        console.log('hAT: ', hAT);
+      }
 
+      // console.log('playerId, rank, suit, handId: ', playerId, rank, suit, handId);
       function playSubHand(v) {
         console.log(333333333333333);
         v.forEach((value, i) => {
@@ -49,7 +58,6 @@ export default class War {
 
         });
       }
-      // if ()
       // console.log('highestNumber, rank: ', highestNumber, rank, rank === highestNumber);
       if (rank > highestNumber) {
         // console.log('rank is higher', rank);

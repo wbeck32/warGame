@@ -8,12 +8,6 @@ module.exports = {
   "rules": {
     "strict": 0
   },
-  "overrides": [{
-    "files": ["./lib/*"],
-    "rules": {
-      // "strict": off
-    }
-  }],
   "parserOptions": {
     "allowImportExportEverywhere": true,
     "ecmaVersion": 6,

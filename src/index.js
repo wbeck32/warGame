@@ -1,6 +1,7 @@
 /* eslint-disable no-console, no-unused-vars */
 import Deck from './Deck';
 
+
 export default class War {
   constructor(numPlayers, numRanks, numSuits) {
     this.numPlayers = numPlayers;
@@ -27,10 +28,10 @@ export default class War {
     let highestNumber = 1;
     const currentPlayers = numPlayers;
     const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
+    return;
     gameDeck.forEach((v, i) => {
       const { playerId, rank, suit } = v;
       let { handId } = v;
-
       // The problem I ran into here was that all the playerIds kept reverting to 0
       // My best conclusion was that it's related to the miscounting of the
       // playerId and handId in the deal() function

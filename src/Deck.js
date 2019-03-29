@@ -70,37 +70,86 @@ export default class Deck {
 
     // dealtArray.push(new Card(dealtCard).makeCard())
 
-    // I think the problem was with how I was setting the
     const { numPlayers, numRanks, numSuits } = this;
     this.createDeck(numRanks, numSuits);
     this.shuffle();
     const dealStack = this.deck;
-    const dealtArray = [];
-    const handArray = Array.from({ length: numRanks }, (x, i) => []);
-    dealStack.forEach((card, idx) => {
-      handArray.forEach((hand, i) => {
-        handArray[i].push(card = {
-          card: dealStack[idx],
-          handId: i,
-          playerId: 0
-        });
-      });
+
+    let handId = 0;
+    let playerId = 0;
+    const handArray = [];
+
+    function* handIds() {
+      if (handId <= numRanks - 1) {
+        yield handId++;
+      } else {
+        handId = 0;
+      }
+    }
+
+    function* playerIds() {
+      console.log(1, playerId);
+      if (playerId < numPlayers) {
+        yield playerId++;
+      } else {
+        playerId = 0;
+        // yield playerId++;
+      }
+    }
+
+
+    dealStack.forEach((card) => {
+      const handId = handIds().next().value;
+      const hand = {
+        handId,
+        playerId: playerIds().next().value,
+        card,
+      };
+      console.log('hand: ', hand);
+      handArray.push(hand);
     });
-    dealtArray.forEach((ele) => {
-      let handId = 0;
-      do {
-        ele.handId = handId + 1;
-        handId = handId + 1;
-      } while (handId < numRanks);
-    });
-    dealtArray.forEach((ele) => {
-      let playerId = 0;
-      do {
-        ele.playerId = playerId + 1;
-        playerId = playerId + 1;
-      } while (playerId <= numPlayers);
-    });
-    return dealtArray;
+    console.log('handArray: ', handArray);
+
+    // const hId = handIds();
+    // // console.log(hId.next().value);
+    // for (const prop in dealStack) {
+    //   // console.log(`dealStack.${prop} = ${dealStack[prop]}`);
+
+    // }
+    // // console.log(dealStack, typeof dealStack);
+    // const dealtArray = [];
+    // const handArray = Array.from({ length: numRanks }, (x, i) => []);
+
+    // handArray.forEach((hand, i) => {
+    //   // console.log(8989898, hId.next().value);
+    //   // const hi = hId.next().value;
+    //   // console.log('hi: ', hi);
+    //   // handArray[i].push(card = {
+    //   //   handId,
+    //   //   playerId: 0
+    //   // });
+    //   dealStack.forEach((card, idx) => {
+    //     const hi = hId.next().value;
+    //     console.log('hi: ', hi);
+
+    //     // console.log(hId.next().value);
+    //   });
+    // });
+    // dealtArray.forEach((ele) => {
+    //   let handId = 0;
+    //   do {
+    //     ele.handId = handId + 1;
+    //     handId = handId + 1;
+    //   } while (handId < numRanks);
+    // });
+    // dealtArray.forEach((ele) => {
+    //   let playerId = 0;
+    //   do {
+    //     ele.playerId = playerId + 1;
+    //     playerId = playerId + 1;
+    //   } while (playerId <= numPlayers);
+    // });
+    // return dealtArray;
   }
 
   createDeck(numRanks, numSuits) {

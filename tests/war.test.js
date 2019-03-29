@@ -4,18 +4,18 @@ import Deck from '../lib/Deck';
 import War from '../lib/index';
 
 
-describe('game test', () => {
+describe.only('game test', () => {
   it('should compare card values correctly', () => {
     const testWar = new War(3, 6, 3).play();
     // console.log(testWar)
   });
   it('should create second war when two cards match in a round', () => {
-
+    // const testWar = new War(3, 1, 1).play();
   });
 });
 describe('deck test', () => {
   it('should shuffle thoroughly', () => {
-    const testDeck = new Deck(3, 6, 3).deal();
+    // const testDeck = new Deck(3, 6, 3).deal();
     // console.log('testDeck: ', testDeck);
 
   });
@@ -25,7 +25,7 @@ describe('deck test', () => {
   it('should not allow too many suits', () => {
 
   });
-  it('should deal cards correctly for two players', () => {
+  it('should deal cards correctly for an odd number of cards', () => {
     // let testDeck = new Deck(2);
     // const cards = testDeck.deal();
     // assert.equal(cards[0].length, 26);

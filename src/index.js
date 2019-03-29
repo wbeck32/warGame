@@ -10,87 +10,62 @@ export default class War {
 
   play() {
     const { numPlayers, numRanks, numSuits } = this;
-    let thisHand = {
-      winningCard: [],
+    let hand = {
+      handId: 0,
+      winningCard: [{ rank: 0, suit: '' }],
       winningPlayer: 0,
-      round: 1,
     };
-    // console.log(99, numPlayers, numRanks, numSuits);
-    const myDeck = new Deck(numPlayers, numRanks, numSuits).deal();
-    const hands = [];
-    const deckIt = myDeck[Symbol.iterator]();
-    for (const card of deckIt) {
-      const cards = [];
-      card.forEach((ele, i) => {
-        for (let u = 0;u <= numPlayers;u++) {
-          let handNum = 0;
-          console.log('ele.userId === u: ', ele.userId === u);
-          if (ele.userId === u) cards.push(card[handNum]);
-          handNum++;
-        }
-        return cards;
-      });
-      console.log('cards: ', cards);
-    }
-    // console.log('hands : ', hands);
-    // myDeck.reduce((a, ele, i) => {
-    //   console.log('a, ele, i: ', a, ele, i);
-    //   const { rank, userId } = ele;
-    //   let handNum = 1;
-    //   console.log('rank, userId: ', rank, userId);
-    //   const aHand = {
-    //     handNum,
-    //     userId,
-    //     rank
-    //   };
-    //   hands.push(aHand);
-    //   handNum++;
-    // }, 0);
-    // console.log('hands: ', hands);
-    // hands.push(hand);
+    const player = {
+      playerId: 0,
+      cardsWon: []
+    };
+    const subHand = {
+      subHandId: 0,
+      winningCard: [{ rank: 0, suit: '' }],
+      winningPlayer: 0,
+    };
+    let highestNumber = 1;
+    const currentPlayers = numPlayers;
+    const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
+    console.log('gameDeck: ', gameDeck);
+    // return;
+    gameDeck.reduce((a, v, i) => {
+      // console.log('i: ', i, v);
+      // console.log('v: ', v, i);
+      // console.log('v, i: ', v, i);
+      const { playerId, rank, suit } = v;
+      let { handId } = v;
+      // console.log('playerId, rank, suit, handId: ', playerId, rank, suit, handId);
 
-    // myDeck.forEach((ele, i) => {
-    //   // console.log('ele, i: ', ele, i);
-    //   let handNum = 0;
-    //   const hand = {
-    //     handNum: handNum++,
-    //     userId: i,
-    //     card: ele[handNum]
-    //   };
-    //   // console.log('hand: ', hand);
-    //   handNum++;
-    //   hands.push(hand);
-    // });
-    // console.log('hands: ', hands);
+      function playSubHand(v) {
+        console.log(333333333333333);
+        v.forEach((value, i) => {
+          console.log('value,i: ', value, i);
 
-    myDeck.map((user) => {
+        });
+      }
+      // if ()
+      // console.log('highestNumber, rank: ', highestNumber, rank, rank === highestNumber);
+      if (rank > highestNumber) {
+        // console.log('rank is higher', rank);
+        highestNumber = rank;
+        hand = {
+          winningCard: v, winningPlayer: playerId, handId: handId++
+        };
+      } else if (handId === handId && rank === rank) {
+        // console.log('handId && rank: ', v, i);
+        // playSubHand(v);
+      } else {
+        // console.log('hn is higher', highestNumber);
+        hand = {
+          handId: handId++,
+        };
+        highestNumber;
+      }
 
-      let highestNumber = 0;
-      let { round } = thisHand;
-      console.log(round);
-      return user.reduce((a, ele, i) => {
-        if (ele[1] > highestNumber) {
-          // console.log('ele is higher', ele[1]);
-          highestNumber = ele[1];
-          thisHand = {
-            winningCard: ele, winningPlayer: i, round: round++,
-          };
-        } else if (ele[1] === highestNumber) {
-          // console.log('values are the same', i);
-          thisHand = {
-            round: round++,
-          };
-        } else {
-          // console.log('hn is higher', highestNumber);
-          thisHand = {
-            round: round++,
-          };
-          highestNumber;
-        }
+      return hand;
+      // console.log(hand);
 
-        return thisHand;
-        // console.log(thisHand);
-      }, 0);
-    });
+    }, 0);
   }
 }

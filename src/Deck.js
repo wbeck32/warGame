@@ -38,12 +38,11 @@ export default class Deck {
   }
 
   deal() {
-    const { numRanks, numSuits } = this;
+    const { numPlayers, numRanks, numSuits } = this;
     this.createDeck(numRanks, numSuits);
     this.shuffle();
     const dealPile = this.deck;
-    const { numPlayers } = this;
-    const dealtArray = [...Array(numPlayers)];
+    let dealtArray = Array.from({ length: numPlayers }, (v, i) => i + 1)
     dealtArray.map((u, idx) => { dealtArray[idx] = []; });
     dealPile.reduce((a, v, i) => {
       const modu = i % numPlayers;

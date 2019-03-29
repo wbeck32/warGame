@@ -1,15 +1,16 @@
 /* eslint-disable no-console */
 
 class Card {
-  constructor(ranks, suits) {
-    this.card = [];
-    this.ranks = ranks;
-    this.suits = suits;
+  constructor(dealtCard, userId) {
+    this.card = {};
+    this.dealtCard = dealtCard;
+    this.userId = userId;
   }
 
   makeCard() {
-    const { card, ranks, suits } = this;
-    console.log(888, ranks, suits);
+    let { card } = this;
+    const { dealtCard: { rank, suit }, userId } = this;
+    card = { rank, suit, userId };
     return card;
   }
 }
@@ -42,11 +43,11 @@ export default class Deck {
     this.createDeck(numRanks, numSuits);
     this.shuffle();
     const dealPile = this.deck;
-    let dealtArray = Array.from({ length: numPlayers }, (v, i) => i + 1)
+    const dealtArray = Array.from({ length: numPlayers }, (v, i) => i + 1);
     dealtArray.map((u, idx) => { dealtArray[idx] = []; });
     dealPile.reduce((a, v, i) => {
-      const modu = i % numPlayers;
-      dealtArray[modu].push(v);
+      const userId = i % numPlayers;
+      dealtArray[userId].push(new Card(v, userId).makeCard());
     }, 0);
     return dealtArray;
   }
@@ -54,17 +55,17 @@ export default class Deck {
   createDeck(numRanks, numSuits) {
     const { deck } = this;
     const allSuits = ['clubs', 'diamonds', 'hearts', 'spades'];
-    const suits = allSuits.slice(0, numSuits)
-    let intialDeck = Array.from({ length: numRanks }, (v, i) => i + 1)
-    let it = intialDeck[Symbol.iterator]()
-    for (let member of it) {
+    const suits = allSuits.slice(0, numSuits);
+    const intialDeck = Array.from({ length: numRanks }, (v, i) => i + 1);
+    let it = intialDeck[Symbol.iterator]();
+    for (const member of it) {
       suits.forEach((i) => {
         it = {
           suit: i,
           rank: member
-        }
-        deck.push(it)
-      })
+        };
+        deck.push(it);
+      });
     }
   }
 }

@@ -1,25 +1,28 @@
-/* eslint-disable no-undef, no-unused-vars */
-const chai = require('chai');
-const assert = chai.assert;
-import War from '../lib/index';
+/* eslint-disable no-console,no-undef, no-unused-vars */
+const { chai, assert } = require('chai');
 import Deck from '../lib/Deck';
+import War from '../lib/index';
 
 
 describe('game test', () => {
   it('should compare card values correctly', () => {
-    let testWar = new War(3, 6, 3).play();
+    const testWar = new War(3, 6, 3).play();
     // console.log(testWar)
   });
   it('should create second war when two cards match in a round', () => {
 
   });
-  it('should', () => {
-
-  });
 });
 describe('deck test', () => {
   it('should shuffle thoroughly', () => {
-    // let testDeck = new Deck(3).deal();
+    const testDeck = new Deck(3, 6, 3).deal();
+    // console.log('testDeck: ', testDeck);
+
+  });
+  it('should not allow too many ranks', () => {
+
+  });
+  it('should not allow too many suits', () => {
 
   });
   it('should deal cards correctly for two players', () => {

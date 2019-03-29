@@ -11,7 +11,7 @@ module.exports = {
   "overrides": [{
     "files": ["./lib/*"],
     "rules": {
-      "strict": off
+      // "strict": off
     }
   }],
   "parserOptions": {
@@ -38,6 +38,6 @@ module.exports = {
     "prefer-destructuring": ["error"],
     "semi": ["error", "always"],
     "sort-imports": "error",
-    "strict": ["error", { "impliedStrict": true }],
+    "strict": ["error"],
   }
 };

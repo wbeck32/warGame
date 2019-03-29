@@ -42,8 +42,8 @@ export default class Deck {
     this.createDeck(numRanks, numSuits);
     this.shuffle();
     const dealStack = this.deck;
-    const handsArray = [];
-
+    // const dealtArray = Array.from({ length: numRanks });
+    const dealtArray = [];
     dealStack.reduce((a, v, i) => {
       const handId = i % numRanks;
       const playerId = i % numPlayers;
@@ -52,10 +52,10 @@ export default class Deck {
         handId,
         playerId
       };
-      handsArray.push(new Card(dealtCard).makeCard());
+      dealtArray.push(new Card(dealtCard).makeCard());
     }, 0);
-    // console.log('handsArray: ', handsArray);
-    return handsArray;
+    // console.log('dealtArray: ', dealtArray);
+    return dealtArray;
   }
   createDeck(numRanks, numSuits) {
     const { deck } = this;

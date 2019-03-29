@@ -27,20 +27,25 @@ export default class War {
     let highestNumber = 1;
     const currentPlayers = numPlayers;
     const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
-    console.log('gameDeck: ', gameDeck);
-    // return;
+    const tmpArray = [];
     gameDeck.reduce((a, v, i) => {
-      // console.log('i: ', i, v);
-      // console.log('v: ', v, i);
-      // console.log('v, i: ', v, i);
+      console.log(' v, i: ', v, i);
+      const tempId = v.handId;
+      const tmpArray = Array.from({ length: numRanks }, (x, i) => []);
+      tmpArray.forEach((ele, i) => {
+        if (v && v.handId === tempId) tmpArray[tempId].push(v);
+
+      });
+      console.log(tmpArray);
       const { playerId, rank, suit } = v;
       let { handId } = v;
+
       // console.log('playerId, rank, suit, handId: ', playerId, rank, suit, handId);
 
       function playSubHand(v) {
         console.log(333333333333333);
         v.forEach((value, i) => {
-          console.log('value,i: ', value, i);
+          // console.log('value,i: ', value, i);
 
         });
       }

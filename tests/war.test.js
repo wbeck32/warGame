@@ -1,10 +1,12 @@
 /* eslint-disable no-console,no-undef, no-unused-vars */
 const { chai, assert } = require('chai');
+import { hand, hand2 } from './testData';
 import Deck from '../lib/Deck';
 import War from '../lib/index';
 
 
 describe('game test', () => {
+  console.log(hand, hand2);
   it('should compare card values correctly', () => {
     const testWar = new War(3, 6, 3).play();
     // console.log(testWar)

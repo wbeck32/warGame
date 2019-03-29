@@ -27,58 +27,37 @@ export default class War {
     let highestNumber = 1;
     const currentPlayers = numPlayers;
     const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
-    return;
     gameDeck.forEach((v, i) => {
-      // console.log('====v====');
-      // console.log('v: ', v);
       const { playerId, rank, suit } = v;
       let { handId } = v;
 
-      if (v.playerId == 0) {
-        const hAZ = [v];
-        console.log('====hAZ====');
-        console.log('hAZ: ', hAZ);
-      }
-      if (v.playerId == 1) {
-        const hAO = [v];
-        console.log('====hAO====');
-        console.log('hAO: ', hAO);
-      }
-      if (v.playerId == 2) {
-        const hAT = [v];
-        console.log('====hAT====');
-        console.log('hAT: ', hAT);
-      }
+      // The problem I ran into here was that all the playerIds kept reverting to 0
+      // My best conclusion was that it's related to the miscounting of the
+      // playerId and handId in the deal() function
 
-      // console.log('playerId, rank, suit, handId: ', playerId, rank, suit, handId);
-      function playSubHand(v) {
-        console.log(333333333333333);
-        v.forEach((value, i) => {
-          // console.log('value,i: ', value, i);
+      // The importance of grouping the arrays by hands was to iterate through each hand
+      // to check to see if there were duplicate rank values in any given hand.
+      // I could then build an array of playerIds that were matches and call playSubHand
 
+      function playSubHand(tiedPlayers) {
+        tiedPlayers.forEach((ele, idx) => {
+          // pull the next card from their hands and then go through the comparison process again
         });
       }
-      // console.log('highestNumber, rank: ', highestNumber, rank, rank === highestNumber);
+
       if (rank > highestNumber) {
-        // console.log('rank is higher', rank);
         highestNumber = rank;
         hand = {
           winningCard: v, winningPlayer: playerId, handId: handId++
         };
-      } else if (handId === handId && rank === rank) {
-        // console.log('handId && rank: ', v, i);
-        // playSubHand(v);
       } else {
-        // console.log('hn is higher', highestNumber);
         hand = {
           handId: handId++,
         };
         highestNumber;
       }
+      // At the end of each hand and subHand, the winning player would have their winning card object stored
 
-      return hand;
-      // console.log(hand);
-
-    }, 0);
+    });
   }
 }

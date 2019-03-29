@@ -38,6 +38,39 @@ export default class Deck {
   }
 
   deal() {
+    // The goal of this function was to build an array of hands.
+    // Each array would be constructed from random numbers
+    // and be structured like this:
+    // const handArray = [
+    //   [
+    //     { handId: 0, player: 0, rank: 8, suit: 'diamonds' },
+    //     { handId: 0, player: 1, rank: 6, suit: 'spades' },
+    //     { handId: 0, player: 2, rank: 4, suit: 'hearts' },
+    //   ],
+    //   [
+    //     { handId: 1, player: 0, rank: 1, suit: 'diamonds' },
+    //     { handId: 1, player: 1, rank: 9, suit: 'hearts' },
+    //     { handId: 1, player: 2, rank: 7, suit: 'hearts' },
+    //   ],
+    //   [
+    //     { handId: 2, player: 0, rank: 8, suit: 'hearts' },
+    //     { handId: 2, player: 1, rank: 6, suit: 'spades' },
+    //     { handId: 2, player: 2, rank: 4, suit: 'hearts' },
+    //   ],
+    // ];
+
+    // After the array was built, each object in each hand would
+    // instantiate a Card object like so:
+
+    // const dealtCard = {
+    //   card: v,
+    //   handId,
+    //   playerId
+    // };
+
+    // dealtArray.push(new Card(dealtCard).makeCard())
+
+    // I think the problem was with how I was setting the
     const { numPlayers, numRanks, numSuits } = this;
     this.createDeck(numRanks, numSuits);
     this.shuffle();

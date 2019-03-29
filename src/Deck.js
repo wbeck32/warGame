@@ -1,28 +1,29 @@
 /* eslint-disable no-console */
 
 class Card {
-  constructor(ranksArray, suitsArray) {
+  constructor(ranks, suits) {
     this.card = [];
-    this.ranks = ranksArray.length;
-    this.suits = suitsArray.length;
+    this.ranks = ranks;
+    this.suits = suits;
   }
 
   makeCard() {
     const { card, ranks, suits } = this;
-    console.log(ranks, suits);
+    console.log(888, ranks, suits);
     return card;
   }
 }
 
 export default class Deck {
   constructor(numPlayers, numRanks, numSuits) {
-    this.cards = [];
+    this.deck = [];
     this.numPlayers = numPlayers;
     this.numRanks = numRanks;
     this.numSuits = numSuits;
   }
+
   shuffle() {
-    const shuffled = this.cards;
+    const shuffled = this.deck;
     let currentIndex = shuffled.length;
     let temporaryValue;
     let randomIndex;
@@ -33,13 +34,14 @@ export default class Deck {
       shuffled[currentIndex] = shuffled[randomIndex];
       shuffled[randomIndex] = temporaryValue;
     }
-    this.cards = shuffled;
+    this.deck = shuffled;
   }
 
   deal() {
-    this.createDeck();
+    const { numRanks, numSuits } = this;
+    this.createDeck(numRanks, numSuits);
     this.shuffle();
-    const dealPile = this.cards;
+    const dealPile = this.deck;
     const { numPlayers } = this;
     const dealtArray = [...Array(numPlayers)];
     dealtArray.map((u, idx) => { dealtArray[idx] = []; });
@@ -51,13 +53,19 @@ export default class Deck {
   }
 
   createDeck(numRanks, numSuits) {
-    const { cards } = this;
-    console.log(cards, numRanks, numSuits);
-    const c = new Card(numRanks, numSuits);
-    const card = c.makeCard();
-    card.forEach((ele) => {
-      cards.push(ele);
-    });
-    this.cards = cards;
+    const { deck } = this;
+    const allSuits = ['clubs', 'diamonds', 'hearts', 'spades'];
+    const suits = allSuits.slice(0, numSuits)
+    let intialDeck = Array.from({ length: numRanks }, (v, i) => i + 1)
+    let it = intialDeck[Symbol.iterator]()
+    for (let member of it) {
+      suits.forEach((i) => {
+        it = {
+          suit: i,
+          rank: member
+        }
+        deck.push(it)
+      })
+    }
   }
 }

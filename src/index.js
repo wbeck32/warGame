@@ -15,12 +15,12 @@ export default class War {
       winningPlayer: 0,
       round: 1,
     };
-
+    console.log(99, numPlayers, numRanks, numSuits)
     return new Deck(numPlayers, numRanks, numSuits).deal()
       .map((u) => {
         let highestNumber = 0;
         let { round } = thisHand;
-        console.log(thisHand.round);
+        console.log(round);
         return u.reduce((a, ele, i) => {
           if (ele[1] > highestNumber) {
             console.log('ele is higher', ele[1]);

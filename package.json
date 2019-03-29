@@ -2,7 +2,7 @@
   "name": "wargame",
   "version": "1.0.0",
   "description": "Writing a version of the game war.",
-  "main": "cardsWithoutSymbols.js",
+  "main": ".src/index.js",
   "directories": {
     "lib": "lib",
     "test": "tests"

@@ -8,7 +8,7 @@ class Card {
 
   makeCard() {
     let { card } = this;
-    const { dealtCard: { card: { suit, rank }, handId, playerId } } = this;
+    const { dealtCard: { handId, playerId, rank, suit } } = this;
     card = { handId, playerId, rank, suit };
     return card;
   }
@@ -45,7 +45,7 @@ export default class Deck {
 
     let handId = 0;
     let playerId = 0;
-    const handArray = [];
+    const dealtArray = Array.from({ length: numPlayers }, (x, i) => []);
 
     let numHands = numRanks;
     let numPersons = numPlayers + 1;
@@ -72,58 +72,17 @@ export default class Deck {
       }
     }
 
-
     dealStack.forEach((card) => {
       const hand = {
         handId: handIds().next().value,
         playerId: playerIds().next().value,
-        card,
+        rank: card.rank,
+        suit: card.suit
       };
-      handArray.push(hand);
+      const handObj = new Card(hand).makeCard();
+      dealtArray[hand.handId].push(handObj);
     });
-    // console.log('handArray: ', handArray);
-
-
-    // const hId = handIds();
-    // // console.log(hId.next().value);
-    // for (const prop in dealStack) {
-    //   // console.log(`dealStack.${prop} = ${dealStack[prop]}`);
-
-    // }
-    // // console.log(dealStack, typeof dealStack);
-    // const dealtArray = [];
-    // const handArray = Array.from({ length: numRanks }, (x, i) => []);
-
-    // handArray.forEach((hand, i) => {
-    //   // console.log(8989898, hId.next().value);
-    //   // const hi = hId.next().value;
-    //   // console.log('hi: ', hi);
-    //   // handArray[i].push(card = {
-    //   //   handId,
-    //   //   playerId: 0
-    //   // });
-    //   dealStack.forEach((card, idx) => {
-    //     const hi = hId.next().value;
-    //     console.log('hi: ', hi);
-
-    //     // console.log(hId.next().value);
-    //   });
-    // });
-    // dealtArray.forEach((ele) => {
-    //   let handId = 0;
-    //   do {
-    //     ele.handId = handId + 1;
-    //     handId = handId + 1;
-    //   } while (handId < numRanks);
-    // });
-    // dealtArray.forEach((ele) => {
-    //   let playerId = 0;
-    //   do {
-    //     ele.playerId = playerId + 1;
-    //     playerId = playerId + 1;
-    //   } while (playerId <= numPlayers);
-    // });
-    // return dealtArray;
+    return dealtArray;
   }
 
   createDeck(numRanks, numSuits) {

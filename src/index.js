@@ -26,13 +26,13 @@ export default class War {
       winningPlayer: 0,
     };
     let highestNumber = 1;
-    let highestHand = {};
+    const highestHand = {};
     const currentPlayers = numPlayers;
     const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
     gameDeck.reduce((a, v, i) => {
       // check for dupes here
       // set creates an array of only the unique values
-      // not quite but close
+      // need to create an array of all v that are duplicated
       const uniqueAddresses = Array.from(new Set(v.map(a => a.rank)));
       console.log('uniqueAddresses: ', uniqueAddresses);
 
@@ -45,16 +45,15 @@ export default class War {
         const { playerId, rank, suit } = hand;
         let { handId } = hand;
 
+        // TODO; store all of players winning hands
         if (rank > highestNumber) {
           // console.log('rank is higher: ', rank);
-          highestHand = hand;
           highestNumber = rank;
           hand = {
             winningCard: v, winningPlayer: playerId, handId: handId++
           };
         } else {
           // console.log('highestNumber is higher: ', highestNumber);
-          highestHand = hand;
           hand = {
             handId: handId++,
           };

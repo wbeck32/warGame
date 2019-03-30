@@ -25,6 +25,7 @@
   },
   "scripts": {
     "watch:build:test": "nodemon --watch src --watch tests --exec 'npm run build & npm run test'",
+    "watch:test": "nodemon --watch src --watch tests --exec 'npm run test'",
     "build": "./node_modules/.bin/babel src --out-dir lib",
     "test": "mocha tests --require @babel/register",
     "start": "npm run watch:build:test"

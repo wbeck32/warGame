@@ -49,18 +49,14 @@ export default class Deck {
 
     let numHands = numRanks;
     let numPersons = numPlayers + 1;
-    let m = 0;
 
     function* handIds() {
-      if (handId <= numHands) {
+      if (numHands > 0) {
         numHands--;
-        console.log('numHands: ', numHands);
-        console.log('handId: ', handId);
         yield handId;
       } else {
-        console.log('else', m++);
         handId++;
-        numHands = numRanks + handId;
+        numHands = numRanks - 1;
         yield handId;
       }
     }
@@ -81,10 +77,8 @@ export default class Deck {
       const hand = {
         handId: handIds().next().value,
         playerId: playerIds().next().value,
-        // card,
+        card,
       };
-      // console.log('hand: ', hand);
-      // console.log('handId: ', handId);
       handArray.push(hand);
     });
     // console.log('handArray: ', handArray);

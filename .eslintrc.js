@@ -28,7 +28,7 @@ module.exports = {
       { "blankLine": "always", "prev": "*", "next": "function" },
     ],
     "prefer-arrow-callback": "error",
-    "prefer-const": "error",
+    "prefer-const": "warn",
     "prefer-destructuring": ["error"],
     "semi": ["error", "always"],
     "sort-imports": "error",

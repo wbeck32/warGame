@@ -11,7 +11,7 @@ export default class War {
 
   play() {
     const { numPlayers, numRanks, numSuits } = this;
-    let hand = {
+    const hand = {
       handId: 0,
       winningCard: [{ rank: 0, suit: '' }],
       winningPlayer: 0,
@@ -26,39 +26,41 @@ export default class War {
       winningPlayer: 0,
     };
     let highestNumber = 1;
+    let highestHand = {};
     const currentPlayers = numPlayers;
     const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
-    return;
-    gameDeck.forEach((v, i) => {
-      const { playerId, rank, suit } = v;
-      let { handId } = v;
-      // The problem I ran into here was that all the playerIds kept reverting to 0
-      // My best conclusion was that it's related to the miscounting of the
-      // playerId and handId in the deal() function
-
-      // The importance of grouping the arrays by hands was to iterate through each hand
-      // to check to see if there were duplicate rank values in any given hand.
-      // I could then build an array of playerIds that were matches and call playSubHand
+    gameDeck.reduce((a, v, i) => {
+      // check for dupes here
+      // set creates an array of only the unique values
+      // not quite but close
+      const uniqueAddresses = Array.from(new Set(v.map(a => a.rank)));
+      console.log('uniqueAddresses: ', uniqueAddresses);
 
       function playSubHand(tiedPlayers) {
         tiedPlayers.forEach((ele, idx) => {
           // pull the next card from their hands and then go through the comparison process again
         });
       }
+      v.forEach((hand, idx) => {
+        const { playerId, rank, suit } = hand;
+        let { handId } = hand;
 
-      if (rank > highestNumber) {
-        highestNumber = rank;
-        hand = {
-          winningCard: v, winningPlayer: playerId, handId: handId++
-        };
-      } else {
-        hand = {
-          handId: handId++,
-        };
-        highestNumber;
-      }
-      // At the end of each hand and subHand, the winning player would have their winning card object stored
-
-    });
+        if (rank > highestNumber) {
+          // console.log('rank is higher: ', rank);
+          highestHand = hand;
+          highestNumber = rank;
+          hand = {
+            winningCard: v, winningPlayer: playerId, handId: handId++
+          };
+        } else {
+          // console.log('highestNumber is higher: ', highestNumber);
+          highestHand = hand;
+          hand = {
+            handId: handId++,
+          };
+          highestNumber;
+        }
+      });
+    }, 0);
   }
 }

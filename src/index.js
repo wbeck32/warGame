@@ -28,8 +28,6 @@ export default class War {
     const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
 
     gameDeck.reduce((a, v, i) => {
-      // console.log('a, v, i: ', a, v, i);
-
 
       function playSubHand() {
         const data = v;
@@ -56,25 +54,17 @@ export default class War {
         isSubHand: false
       };
       const match = playSubHand();
-      console.log('match222: ', match);
       v.forEach((hand, idxx) => {
-        const subHandId = 0;
-        const subHandRank = 0;
+        let subHandId = 0;
         // TODO why is the match array being created multiple times
         // TODO store all of players winning hands
         // TODO use reduce? to group matches in a given hand
 
-        if (match && match.length > 0 && match[0].handId) {
-          console.log('match: ', match);
-          // console.log('a match is a match', match, match[0].handId, match[0].playerId, match[0].rank);
+        if (match && match.length > 0) {
+          console.log('match');
           const players = [];
           const cards = [];
-
-
-
           match.forEach((elemen, ind) => {
-            // console.log('elemen,ind: ', elemen);
-            // console.log('match[0].handId === elemen.handId: ', match[0].handId, elemen.handId);
             if (match[0].rank === elemen.rank && match[0].handId === elemen.handId) {
               players.push(elemen.playerId);
               cards.push({ rank: elemen.rank, suit: elemen.suit });
@@ -86,56 +76,58 @@ export default class War {
                 highestHand: {},
                 isSubHand: true
               };
+              subHandId++;
+              return handInPlay;
             }
-            return handInPlay;
           });
         } else {
+          console.log('not a match');
           const players = [];
           const cards = [];
-          v.filter((item) => {
-            // console.log('it is not a match: ', item.handId, item.playerId, item.rank);
+          v.forEach((item, index) => {
             players.push(item.playerId);
             cards.push({ rank: item.rank, suit: item.suit });
-            // handInPlay = {
-            // handId: item.handId,
-            // players,
-            // cards,
-            // highestNumber: 1,
-            // highestHand: {},
-            // isSubHand: false
-            // };
-            // return handInPlay;
+            handInPlay = {
+              handId: item.handId,
+              players,
+              cards,
+              highestNumber: 1,
+              highestHand: {},
+              isSubHand: false
+            };
+            return handInPlay;
           });
         }
 
         const { handId, players, cards, isSubHand } = handInPlay;
         let { highestNumber, highestHand } = handInPlay;
-        if (isSubHand === true) {
-          // console.log('handInPlay: ', handInPlay);
-
-
+        if (isSubHand) {
+          // TODO figure this out
+          let { handId } = v[0];
+          let newHandId = handId + 1;
+          console.log('newHandId: ', newHandId);
+        } else {
+          cards.filter((card, index) => {
+            const { rank } = card;
+            if (rank > highestNumber) {
+              console.log('rank is higher: ', rank, handId, handInPlay.cards);
+              highestHand = handInPlay.cards.find(ele => {
+                ele.rank === rank;
+                return ele;
+              });
+              highestNumber = rank;
+            } else if (highestNumber > rank) {
+              console.log('highestNumber is higher: ', highestNumber, handId, handInPlay.cards);
+              highestHand = handInPlay.cards.find((ele, i) => {
+                ele.rank === rank;
+                return ele;
+              });
+              // console.log('highestHand: ', highestHand);
+              // console.log(handInPlay.cards.indexOf(highestHand));
+            }
+          });
+          console.log('highestNumber, highestHand: ', highestNumber, highestHand);
         }
-        cards.filter((card, index) => {
-          // console.log('card: ', card);
-          const { rank } = card;
-          if (rank > highestNumber) {
-            // console.log('rank is higher: ', rank, handId, handInPlay.cards);
-            highestHand = handInPlay.cards.find(ele => {
-              ele.rank === rank;
-              return ele;
-            });
-            highestNumber = rank;
-          } else if (highestNumber > rank) {
-            // console.log('highestNumber is higher: ', highestNumber, handId, handInPlay.cards);
-            highestHand = handInPlay.cards.find((ele, i) => {
-              ele.rank === rank;
-              return ele;
-            });
-            // console.log('highestHand: ', highestHand);
-            // console.log(handInPlay.cards.indexOf(highestHand));
-          }
-        });
-        // console.log('highestNumber, highestHand: ', highestNumber, highestHand);
 
         // console.log('handId: ', handId, 'playerId: ', playerId, 'rank:', rank, 'hN: ', highestNumber);
       }, 0);

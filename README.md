@@ -2,7 +2,7 @@
 
 This is an interpretation of the game War that I built in JavaScript.
 
-[Rules of the game]('https://en.wikipedia.org/wiki/War_(card_game)')
+[Rules of the game](https://en.wikipedia.org/wiki/War_(card_game))
 
 I tried to use as many of the new ES6 features as I could so I added Babel to transpile the code for maximum compatibility.
 

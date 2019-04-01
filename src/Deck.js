@@ -7,11 +7,9 @@ class Card {
   }
 
   makeCard() {
-    // console.log('dealtCard: ', this.dealtCard);
     let { card } = this;
     const { dealtCard: { handId, playerId, rank, suit } } = this;
     card = { handId, playerId, rank, suit };
-    // console.log('handId, playerId, rank, suit: ', handId, playerId, rank, suit);
     return card;
   }
 }
@@ -87,10 +85,11 @@ export default class Deck {
   createDeck() {
     // TODO: make sure there are enough cards so no player has more than one card more or less than the others
     const { deck, numPlayers, numRanks, numSuits } = this;
+    if (numRanks > 13 || numSuits > 4) console.log(`Nope, that would make ${numRanks * numSuits} cards and that is too many cards.`);
+    const even = numRanks * numSuits % numPlayers;
+    if (even > 1) console.log(`That is not a fair game. One player would only have ${even} cards.`);
     const allSuits = ['clubs', 'diamonds', 'hearts', 'spades'];
     const suits = allSuits.slice(0, numSuits);
-    const even = numRanks * numSuits % numPlayers;
-    // console.log('even: ', even);
     const intialDeck = Array.from({ length: numRanks }, (v, i) => i + 1);
     let it = intialDeck[Symbol.iterator]();
     for (const member of it) {

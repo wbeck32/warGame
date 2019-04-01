@@ -4,14 +4,13 @@ import Deck from '../lib/Deck';
 import War from '../lib/index';
 
 
+// players,ranks,suits
 describe('game test', () => {
   it('should compare card values correctly', () => {
-    // players,ranks,suits
     const testWar = new War(4, 4, 3).play();
-    // console.log(testWar)
   });
   it('should create second war when two cards match in a hand', () => {
-    // const testWar = new War(3, 1, 1).play();
+    // TODO
   });
 });
 describe('deck test', () => {
@@ -20,13 +19,14 @@ describe('deck test', () => {
     // console.log('testDeck: ', testDeck);
   });
   it('should not allow too many ranks', () => {
-
+    const testWar = new War(4, 15, 3).play();
   });
   it('should not allow too many suits', () => {
+    const testWar = new War(4, 13, 5).play();
 
   });
   it('should deal cards correctly for an odd number of cards', () => {
-    // let testDeck = new Deck(2);
+    let testDeck = new Deck(5, 13, 3).deal();
     // const cards = testDeck.deal();
     // assert.equal(cards[0].length, 26);
   });
@@ -46,14 +46,7 @@ describe('deck test', () => {
 
   });
   it('should not create more than 52 cards', () => {
-
-  });
-});
-describe('card test', () => {
-
-  it('should', () => {
-  });
-  it('should', () => {
+    const testDeck = new Deck(5, 15, 5).deal();
 
   });
 });

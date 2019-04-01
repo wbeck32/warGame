@@ -61,7 +61,7 @@ export default class War {
         // TODO use reduce? to group matches in a given hand
 
         if (match && match.length > 0) {
-          console.log('match');
+          // console.log('match');
           const players = [];
           const cards = [];
           match.forEach((elemen, ind) => {
@@ -81,7 +81,7 @@ export default class War {
             }
           });
         } else {
-          console.log('not a match');
+          // console.log('not a match');
           const players = [];
           const cards = [];
           v.forEach((item, index) => {
@@ -105,32 +105,27 @@ export default class War {
           // TODO figure this out
           let { handId } = v[0];
           let newHandId = handId + 1;
-          console.log('newHandId: ', newHandId);
         } else {
           cards.filter((card, index) => {
             const { rank } = card;
             if (rank > highestNumber) {
-              console.log('rank is higher: ', rank, handId, handInPlay.cards);
+              // console.log('rank is higher: ', rank, handId, handInPlay.cards);
               highestHand = handInPlay.cards.find(ele => {
                 ele.rank === rank;
                 return ele;
               });
               highestNumber = rank;
             } else if (highestNumber > rank) {
-              console.log('highestNumber is higher: ', highestNumber, handId, handInPlay.cards);
+              // console.log('highestNumber is higher: ', highestNumber, handId, handInPlay.cards);
               highestHand = handInPlay.cards.find((ele, i) => {
                 ele.rank === rank;
                 return ele;
               });
-              // console.log('highestHand: ', highestHand);
-              // console.log(handInPlay.cards.indexOf(highestHand));
             }
           });
-          console.log('highestNumber, highestHand: ', highestNumber, highestHand);
+          // console.log('highestNumber, highestHand: ', highestNumber, highestHand);
         }
-
-        // console.log('handId: ', handId, 'playerId: ', playerId, 'rank:', rank, 'hN: ', highestNumber);
-      }, 0);
+      });
     }, 0);
   }
 }

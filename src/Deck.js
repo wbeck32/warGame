@@ -48,7 +48,7 @@ export default class Deck {
     const dealtArray = Array.from({ length: numPlayers }, (x, i) => []);
 
     let numHands = numRanks;
-    let numPersons = numPlayers + 1;
+    let numPersons = numPlayers;
 
     function* handIds() {
       if (numHands > 0) {
@@ -62,17 +62,17 @@ export default class Deck {
     }
 
     function* playerIds() {
-      if (playerId <= numPersons) {
-        numPersons--;
+      if (playerId < numPersons) {
         yield playerId++;
       } else {
-        numPersons = numPlayers + 1;
+        numPersons = numPlayers;
         playerId = 0;
         yield playerId++;
       }
     }
 
     dealStack.forEach((card) => {
+      console.log('card: ', card);
       const hand = {
         handId: handIds().next().value,
         playerId: playerIds().next().value,
@@ -82,6 +82,7 @@ export default class Deck {
       const handObj = new Card(hand).makeCard();
       dealtArray[hand.handId].push(handObj);
     });
+    // console.log('dealtArray: ', dealtArray);
     return dealtArray;
   }
 

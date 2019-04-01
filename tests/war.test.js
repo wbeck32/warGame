@@ -6,7 +6,8 @@ import War from '../lib/index';
 
 describe('game test', () => {
   it('should compare card values correctly', () => {
-    const testWar = new War(10, 6, 4).play();
+    // players,ranks,suits
+    const testWar = new War(5, 6, 4).play();
     // console.log(testWar)
   });
   it('should create second war when two cards match in a hand', () => {
@@ -38,9 +39,10 @@ describe('deck test', () => {
   });
 
   it('should not create any duplicate cards', () => {
+    // use array.every indexOf ?
 
   });
-  it('should', () => {
+  it('should create enough cards to deal evenly', () => {
 
   });
 });

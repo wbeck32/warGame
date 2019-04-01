@@ -1,4 +1,4 @@
-/* eslint-disable no-console, no-unused-vars */
+/* eslint-disable no-console, no-unused-vars, no-undefined */
 import Deck from './Deck';
 
 
@@ -26,38 +26,57 @@ export default class War {
       winningPlayer: 0,
     };
     let highestNumber = 1;
-    const highestHand = {};
+    let highestHand = {};
     const currentPlayers = numPlayers;
     const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
-    gameDeck.reduce((a, v, i) => {
-      // check for dupes here
-      // set creates an array of only the unique values
-      // need to create an array of all v that are duplicated
-      const uniqueAddresses = Array.from(new Set(v.map(a => a.rank)));
-      console.log('uniqueAddresses: ', uniqueAddresses);
+    console.log('gameDeck: ', gameDeck);
 
-      function playSubHand(tiedPlayers) {
-        tiedPlayers.forEach((ele, idx) => {
-          // pull the next card from their hands and then go through the comparison process again
-        });
-      }
-      v.forEach((hand, idx) => {
+    gameDeck.reduce((a, v, i) => {
+      v.forEach((w, j) => {
         const { playerId, rank, suit } = hand;
-        let { handId } = hand;
+        const { handId } = hand;
+
+        playSubHand(handId);
+
+        function playSubHand(handId) {
+          const compareArray = new Array();
+          for (let h = 0;h <= numRanks;h++) {
+            compareArray[h] = new Array();
+          }
+          const filter = v.filter((mele, idx) => {
+            // console.log('mele, idx: ', mele.handId, idx);
+            compareArray[idx][mele.handId] = mele;
+
+          });
+        }
+        const tmpArray = [];
+        const currHandId = 0;
+        compare(v);
 
         // TODO; store all of players winning hands
-        if (rank > highestNumber) {
-          // console.log('rank is higher: ', rank);
-          highestNumber = rank;
-          hand = {
-            winningCard: v, winningPlayer: playerId, handId: handId++
-          };
-        } else {
-          // console.log('highestNumber is higher: ', highestNumber);
-          hand = {
-            handId: handId++,
-          };
-          highestNumber;
+        function compare(v) {
+          // console.log('handId, rank, highestNumber: ', handId, rank, highestNumber);
+          if (rank > highestNumber) {
+            // console.log('rank is higher: ', rank);
+            highestHand === hand;
+            highestNumber = rank;
+          } else if (highestNumber > rank) {
+            // console.log('highestNumber is higher: ', highestNumber);
+            highestHand = hand;
+            highestNumber;
+          } else {
+            // this is not comparing the right values
+            // console.log('they seem to be equal');
+            // console.log('hand.rank: ', hand.rank);
+            const match = v.filter(item => {
+              // console.log('handId: ', item.handId, hand.handId);
+              // console.log('rank: ', item.rank, hand.rank);
+              item.handId === hand.handId && item.rank === hand.rank;
+            });
+            // console.log('match: ', match);
+            tmpArray.push(v);
+            // console.log('tmpArray: ', tmpArray);
+          }
         }
       });
     }, 0);

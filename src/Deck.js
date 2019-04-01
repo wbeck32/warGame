@@ -85,9 +85,15 @@ export default class Deck {
   createDeck() {
     // TODO: make sure there are enough cards so no player has more than one card more or less than the others
     const { deck, numPlayers, numRanks, numSuits } = this;
-    if (numRanks > 13 || numSuits > 4) console.log(`Nope, that would make ${numRanks * numSuits} cards and that is too many cards.`);
+    if (numRanks > 13 || numSuits > 4) {
+      console.log(`Nope, that would make ${numRanks * numSuits} cards and that is too many cards.`);
+      return;
+    }
     const even = numRanks * numSuits % numPlayers;
-    if (even > 1) console.log(`That is not a fair game. One player would only have ${even} cards.`);
+    if (even > 1) {
+      console.log(`That is not a fair game. One player would only have ${even} cards.`);
+      return;
+    }
     const allSuits = ['clubs', 'diamonds', 'hearts', 'spades'];
     const suits = allSuits.slice(0, numSuits);
     const intialDeck = Array.from({ length: numRanks }, (v, i) => i + 1);

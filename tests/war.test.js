@@ -1,5 +1,5 @@
 /* eslint-disable no-console,no-undef, no-unused-vars */
-const { chai, assert } = require('chai');
+const { chai, assert, expect } = require('chai');
 import Deck from '../lib/Deck';
 import War from '../lib/index';
 
@@ -14,31 +14,34 @@ describe('game test', () => {
   });
 });
 describe('deck test', () => {
-  it('should shuffle thoroughly', () => {
-    // const testDeck = new Deck(3, 6, 3).deal();
-    // console.log('testDeck: ', testDeck);
-  });
   it('should not allow too many ranks', () => {
-    const testWar = new War(4, 15, 3).play();
+    const testDeck = new Deck(4, 15, 3).deal();
+    expect(testDeck).to.have.length(15);
+    expect(testDeck[0]).to.be.empty;
   });
   it('should not allow too many suits', () => {
-    const testWar = new War(4, 13, 5).play();
-
+    const testDeck = new Deck(4, 13, 5).deal();
+    expect(testDeck).to.have.length(13);
+    expect(testDeck[0]).to.be.empty;
   });
   it('should deal cards correctly for an odd number of cards', () => {
     let testDeck = new Deck(5, 13, 3).deal();
+    // console.log('testDeck: ', testDeck);
     // const cards = testDeck.deal();
     // assert.equal(cards[0].length, 26);
   });
   it('should deal cards correctly for three players', () => {
-    // let testDeck = new Deck(3);
-    // const cards = testDeck.deal();
+    let testDeck = new Deck(3, 6, 4).deal();
+    console.log('testDeck: ', testDeck);
+
     // assert.equal(cards[0].length, 18);
     // assert.equal(cards[1].length, 17);
     // assert.equal(cards[2].length, 17);
   });
 
   it('should not create any duplicate cards', () => {
+    // let testDeck = new Deck(2, 10, 4).deal();
+    // TODO still not dealing correctly
     // use array.every indexOf ?
 
   });
@@ -47,6 +50,7 @@ describe('deck test', () => {
   });
   it('should not create more than 52 cards', () => {
     const testDeck = new Deck(5, 15, 5).deal();
-
+    expect(testDeck).to.have.length(15);
+    expect(testDeck[0]).to.be.empty;
   });
 });

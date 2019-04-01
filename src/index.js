@@ -11,38 +11,34 @@ export default class War {
 
   play() {
     const { numPlayers, numRanks, numSuits } = this;
-    const hand = {
-      handId: 0,
-      winningCard: [{ rank: 0, suit: '' }],
-      winningPlayer: 0,
-    };
-    const players = {
-      player: {
-        playerId: 0,
-        cardsWon: []
-      }
-    };
-    const highestNumber = 1;
-    const highestHand = {};
-    const currentPlayers = numPlayers;
     const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
 
     gameDeck.reduce((a, v, i) => {
+      let handWinner = {
+        handId: 0,
+        winningCard: [{ rank: 0, suit: '' }],
+        winningPlayer: 0,
+      };
+
+      let gameWinner = {
+        playerId: 0,
+        cardsWon: []
+      };
 
       function playSubHand() {
         const data = v;
-        let tmpArr = [];
+        let matchArr = [];
         const countBy = (d, id) => d.reduce((r, { rank }, i, a) => (r[rank] = a.filter(x => x.rank == rank).length, r), {});
         const counts = countBy(data, data.rank);
         let obj = Object.entries(counts);
-        let filtered = obj.filter(thing => {
+        obj.filter(thing => {
           if (thing[1] > 1) {
             v.forEach(elem => {
-              if (elem.rank == thing[0]) tmpArr.push(elem);
+              if (elem.rank == thing[0]) matchArr.push(elem);
             });
           }
         });
-        return tmpArr;
+        return matchArr;
       }
 
       let handInPlay = {
@@ -53,15 +49,16 @@ export default class War {
         highestHand: {},
         isSubHand: false
       };
+
+      // TODO why is the match array being created multiple times
+      // TODO store all of players winning hands
+      // TODO use reduce? to group matches in a given hand
+
       const match = playSubHand();
       v.forEach((hand, idxx) => {
         let subHandId = 0;
-        // TODO why is the match array being created multiple times
-        // TODO store all of players winning hands
-        // TODO use reduce? to group matches in a given hand
 
         if (match && match.length > 0) {
-          // console.log('match');
           const players = [];
           const cards = [];
           match.forEach((elemen, ind) => {
@@ -81,7 +78,6 @@ export default class War {
             }
           });
         } else {
-          // console.log('not a match');
           const players = [];
           const cards = [];
           v.forEach((item, index) => {
@@ -104,7 +100,7 @@ export default class War {
         if (isSubHand) {
           // TODO figure this out
           let { handId } = v[0];
-          let newHandId = handId + 1;
+          // get the cards from these specific users' next hand - handId + 1
         } else {
           cards.filter((card, index) => {
             const { rank } = card;
@@ -122,8 +118,17 @@ export default class War {
                 return ele;
               });
             }
+            handWinner = {
+              handId: 0,
+              winningCard: [{ rank: 0, suit: '' }],
+              winningPlayer: 0
+            };
           });
-          // console.log('highestNumber, highestHand: ', highestNumber, highestHand);
+          gameWinner = {
+            playerId: 0,
+            cards: []
+          };
+          return gameWinner;
         }
       });
     }, 0);

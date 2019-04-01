@@ -73,10 +73,11 @@ export default class War {
                 highestHand: {},
                 isSubHand: true
               };
+              return handInPlay;
             }
           });
         } else {
-          const { handId, playerId } = hand;
+          const { handId } = hand;
           const players = [];
           const cards = [];
           players.push(hand.playerId);
@@ -89,22 +90,30 @@ export default class War {
             highestHand,
             isSubHand: false
           };
+          return handInPlay;
         }
-        console.log("======handInPlay======");
-        console.log(handInPlay);
-        console.log("======handInPlay======");
-        const { handId, players, cards, highestNumber, highestHand, isSubHand } = handInPlay;
-        // if (rank > highestNumber) {
-        //   // console.log('rank is higher: ', rank, handId, playerId, isSubHand);
-        //   highestHand === hand;
-        //   highestNumber = rank;
-        // } else if (highestNumber > rank) {
-        //   // console.log('highestNumber is higher: ', highestNumber, handId, playerId, isSubHand);
-        //   highestHand = hand;
-        //   // highestNumber;
-        // }
+        // console.log("======handInPlay======");
+        // console.log(handInPlay);
+        // console.log("======handInPlay======");
+        const { handId, players, cards, isSubHand } = handInPlay;
+        let { highestNumber, highestHand } = handInPlay;
+
+        cards.forEach((card, kijihih) => {
+          console.log('card: ', card, highestNumber, highestHand);
+          const { rank } = card;
+          if (rank > highestNumber) {
+            // console.log('rank is higher: ', rank, handId, isSubHand);
+            highestHand === hand;
+            highestNumber = rank;
+          } else if (highestNumber > rank) {
+            // console.log('highestNumber is higher: ', highestNumber, handId, isSubHand);
+            highestHand = hand;
+            //   // highestNumber;
+            // }
+          }
+        });
         // console.log('handId: ', handId, 'playerId: ', playerId, 'rank:', rank, 'hN: ', highestNumber);
-      });
-    }, 0);
+      }, 0);
+    });
   }
 }

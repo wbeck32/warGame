@@ -7,7 +7,7 @@ import War from '../lib/index';
 describe('game test', () => {
   it('should compare card values correctly', () => {
     // players,ranks,suits
-    const testWar = new War(5, 6, 4).play();
+    const testWar = new War(4, 6, 4).play();
     // console.log(testWar)
   });
   it('should create second war when two cards match in a hand', () => {

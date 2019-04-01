@@ -25,19 +25,12 @@ export default class War {
       winningCard: [{ rank: 0, suit: '' }],
       winningPlayer: 0,
     };
-    let handInPlay = {
-      handId: 0,
-      players: [],
-      cards: [],
-      isSubHand: false
-    };
     const highestNumber = 1;
     const highestHand = {};
     const currentPlayers = numPlayers;
     const gameDeck = new Deck(numPlayers, numRanks, numSuits).deal();
 
     gameDeck.reduce((a, v, i) => {
-      const allMatches = [];
 
       function playSubHand(j) {
         if (gameDeck[j] !== undefined) {
@@ -49,6 +42,14 @@ export default class War {
         }
       }
 
+      let handInPlay = {
+        handId: 0,
+        players: [],
+        cards: [],
+        highestNumber: 1,
+        highestHand: {},
+        isSubHand: false
+      };
       v.forEach((hand, idxx) => {
         const subHandId = 0;
         const subHandRank = 0;
@@ -77,29 +78,53 @@ export default class War {
             }
           });
         } else {
-          const { handId } = hand;
           const players = [];
           const cards = [];
-          players.push(hand.playerId);
-          cards.push({ rank: hand.rank, suit: hand.suit });
-          handInPlay = {
-            handId,
-            players,
-            cards,
-            highestNumber,
-            highestHand,
-            isSubHand: false
-          };
-          return handInPlay;
+          const filt = v.filter((item) => {
+            return item.handId === 0;
+          });
+          console.log('filt: ', filt);
+          v.reduce((acc, curr, idx, v) => {
+            // console.log('curr: ', curr);
+            // const haI = curr.handId === 1 ? acc : acc.push(curr);
+            // console.log('haI: ', haI);
+            // console.log('vindex, i: ', i);
+            // v.filter((duh, xed) => {
+            //   // console.log('duh: ', duh, xed);
+            //   const tmp = [];
+            //   if (duh.handId === 1) {
+            //     console.log('duh.handId: ', duh);
+            //     tmp.push[duh];
+            //   }
+            //   // console.log(tmp);
+            // }, 0);
+            // const { handId, playerId, rank, suit } = vindex;
+            // const { highestNumber, highestHand } = handInPlay;
+            // players.push(vindex.playerId);
+            // console.log('vindex.playerId: ', handId, playerId);
+            // cards.push({ rank: vindex.rank, suit: vindex.suit });
+
+            // handInPlay = {
+            //   handId,
+            //   players,
+            //   cards,
+            //   highestNumber,
+            //   highestHand,
+            // };
+            // return handInPlay;
+          });
+          // console.log('not a match', handInPlay);
         }
+        // return handInPlay;
         // console.log("======handInPlay======");
         // console.log(handInPlay);
         // console.log("======handInPlay======");
         const { handId, players, cards, isSubHand } = handInPlay;
+        // console.log('players, cards: ', players, cards, isSubHand);
         let { highestNumber, highestHand } = handInPlay;
 
         cards.forEach((card, kijihih) => {
-          console.log('card: ', card, highestNumber, highestHand);
+          // console.log('card: ', card, highestNumber, highestHand);
           const { rank } = card;
           if (rank > highestNumber) {
             // console.log('rank is higher: ', rank, handId, isSubHand);

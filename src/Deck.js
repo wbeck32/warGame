@@ -7,9 +7,11 @@ class Card {
   }
 
   makeCard() {
+    // console.log('dealtCard: ', this.dealtCard);
     let { card } = this;
     const { dealtCard: { handId, playerId, rank, suit } } = this;
     card = { handId, playerId, rank, suit };
+    // console.log('handId, playerId, rank, suit: ', handId, playerId, rank, suit);
     return card;
   }
 }
@@ -46,17 +48,15 @@ export default class Deck {
     let handId = 0;
     let playerId = 0;
     const dealtArray = Array.from({ length: numPlayers }, (x, i) => []);
-
-    let numHands = numRanks;
+    // let numHands = numRanks;
     let numPersons = numPlayers;
 
     function* handIds() {
-      if (numHands > 0) {
-        numHands--;
+      if (playerId < numPersons) {
         yield handId;
       } else {
+        playerId = 0;
         handId++;
-        numHands = numRanks - 1;
         yield handId;
       }
     }
@@ -65,13 +65,14 @@ export default class Deck {
       if (playerId < numPersons) {
         yield playerId++;
       } else {
-        numPersons = numPlayers;
         playerId = 0;
-        yield playerId++;
+        yield playerId;
       }
     }
 
     dealStack.forEach((card) => {
+      // handId = 0-5
+      // playerId = 0-3
       const hand = {
         handId: handIds().next().value,
         playerId: playerIds().next().value,
@@ -79,8 +80,11 @@ export default class Deck {
         suit: card.suit
       };
       const handObj = new Card(hand).makeCard();
+      console.log('handObj: ', handObj, hand.handId);
+      console.log('dealtArray[hand.handId]: ', dealtArray[hand.handId]);
       dealtArray[hand.handId].push(handObj);
     });
+    console.log('dealtArray: ', dealtArray);
     return dealtArray;
   }
 
@@ -89,6 +93,8 @@ export default class Deck {
     const { deck, numPlayers, numRanks, numSuits } = this;
     const allSuits = ['clubs', 'diamonds', 'hearts', 'spades'];
     const suits = allSuits.slice(0, numSuits);
+    const even = numRanks * numSuits % numPlayers;
+    // console.log('even: ', even);
     const intialDeck = Array.from({ length: numRanks }, (v, i) => i + 1);
     let it = intialDeck[Symbol.iterator]();
     for (const member of it) {

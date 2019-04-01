@@ -33,16 +33,18 @@ export default class War {
 
       function playSubHand() {
         const data = v;
-
+        let tmpArr = [];
         const countBy = (d, id) => d.reduce((r, { rank }, i, a) => (r[rank] = a.filter(x => x.rank == rank).length, r), {});
         const counts = countBy(data, data.rank);
-        console.log('counts: ', counts);
-        console.log(Object.entries(counts));
-        let filtered = data.filter(x => {
-          console.log('x: ', x.rank, x);
-          [x.rank] === data.rank;
+        let obj = Object.entries(counts);
+        let filtered = obj.filter(thing => {
+          if (thing[1] > 1) {
+            v.forEach(elem => {
+              if (elem.rank == thing[0]) tmpArr.push(elem);
+            });
+          }
         });
-        console.log('filtered: ', filtered);
+        return tmpArr;
       }
 
       let handInPlay = {
@@ -54,9 +56,8 @@ export default class War {
         isSubHand: false
       };
       const match = playSubHand();
-      console.log('match: ', match);
+      console.log('match222: ', match);
       v.forEach((hand, idxx) => {
-        // console.log('hand, idxx: ', hand, idxx);
         const subHandId = 0;
         const subHandRank = 0;
         // TODO why is the match array being created multiple times
@@ -64,6 +65,7 @@ export default class War {
         // TODO use reduce? to group matches in a given hand
 
         if (match && match.length > 0 && match[0].handId) {
+          console.log('match: ', match);
           // console.log('a match is a match', match, match[0].handId, match[0].playerId, match[0].rank);
           const players = [];
           const cards = [];

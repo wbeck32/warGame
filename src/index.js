@@ -44,27 +44,41 @@ export default class War {
       }
 
       v.forEach((urg, idxx) => {
-        const { playerId, rank, suit } = urg;
-        const { handId } = urg;
+        const { playerId, suit } = urg;
+        let { handId, rank } = urg;
         const tmpArray = [];
-        const currHandId = 0;
+        const subHandId = 0;
+        const subHandRank = 0;
+
+        // TODO why is the match array being created multiple times
+        // TODO store all of players winning hands
+        // TODO use reduce? to group matches in a given hand
 
         const match = playSubHand(idxx);
-        if (match) allMatches.push(match);
-        // TODO why is the match array being created multiple times
-        // TODO; store all of players winning hands
+        if (match && match.length > 0 && match[0].handId) {
+          console.log('a match is a match', match[0].handId, match[0].playerId, match[0].rank);
+          const matchArray = [];
+          match.forEach((elemen) => {
+            if (match[0].rank === elemen.rank && match[0].handId === elemen.handId) {
+              matchArray.push(elemen);
+            }
+          });
+          console.log("======matchArray======");
+          console.log(matchArray);
+          console.log("======matchArray======");
 
-        function compare(thisHand) {
-          // console.log('handId, rank, highestNumber: ', handId, rank, highestNumber);
-          if (rank > highestNumber) {
-            console.log('rank is higher: ', rank);
-            highestHand === hand;
-            highestNumber = rank;
-          } else if (highestNumber > rank) {
-            console.log('highestNumber is higher: ', highestNumber);
-            highestHand = hand;
-            highestNumber;
-          }
+          handId = subHandId;
+          rank = subHandRank;
+        }
+        // console.log('handId: ', handId, 'playerId: ', playerId, 'rank:', rank, 'hN: ', highestNumber);
+        if (rank > highestNumber) {
+          // console.log('rank is higher: ', rank);
+          highestHand === hand;
+          highestNumber = rank;
+        } else if (highestNumber > rank) {
+          // console.log('highestNumber is higher: ', highestNumber);
+          highestHand = hand;
+          // highestNumber;
         }
       });
     }, 0);

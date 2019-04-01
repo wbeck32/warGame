@@ -80,40 +80,20 @@ export default class War {
         } else {
           const players = [];
           const cards = [];
-          const filt = v.filter((item) => {
-            return item.handId === 0;
+          v.filter((item) => {
+            players.push(item.playerId);
+            cards.push({ rank: item.rank, suit: item.suit });
+            handInPlay = {
+              handId: item.handId,
+              players,
+              cards,
+              highestNumber: 1,
+              highestHand: {},
+              isSubHand: false
+            };
+            return handInPlay;
           });
-          console.log('filt: ', filt);
-          v.reduce((acc, curr, idx, v) => {
-            // console.log('curr: ', curr);
-            // const haI = curr.handId === 1 ? acc : acc.push(curr);
-            // console.log('haI: ', haI);
-            // console.log('vindex, i: ', i);
-            // v.filter((duh, xed) => {
-            //   // console.log('duh: ', duh, xed);
-            //   const tmp = [];
-            //   if (duh.handId === 1) {
-            //     console.log('duh.handId: ', duh);
-            //     tmp.push[duh];
-            //   }
-            //   // console.log(tmp);
-            // }, 0);
-            // const { handId, playerId, rank, suit } = vindex;
-            // const { highestNumber, highestHand } = handInPlay;
-            // players.push(vindex.playerId);
-            // console.log('vindex.playerId: ', handId, playerId);
-            // cards.push({ rank: vindex.rank, suit: vindex.suit });
-
-            // handInPlay = {
-            //   handId,
-            //   players,
-            //   cards,
-            //   highestNumber,
-            //   highestHand,
-            // };
-            // return handInPlay;
-          });
-          // console.log('not a match', handInPlay);
+          console.log('handInPlay: ', handInPlay);
         }
         // return handInPlay;
         // console.log("======handInPlay======");
@@ -139,6 +119,6 @@ export default class War {
         });
         // console.log('handId: ', handId, 'playerId: ', playerId, 'rank:', rank, 'hN: ', highestNumber);
       }, 0);
-    });
+    }, 0);
   }
 }

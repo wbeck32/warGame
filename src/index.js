@@ -1,4 +1,4 @@
-/* eslint-disable no-console, no-unused-vars, no-undefined */
+/* eslint-disable no-unused-vars */
 import Deck from './Deck';
 
 
@@ -105,14 +105,12 @@ export default class War {
           cards.filter((card, index) => {
             const { rank } = card;
             if (rank > highestNumber) {
-              // console.log('rank is higher: ', rank, handId, handInPlay.cards);
               highestHand = handInPlay.cards.find(ele => {
                 ele.rank === rank;
                 return ele;
               });
               highestNumber = rank;
             } else if (highestNumber > rank) {
-              // console.log('highestNumber is higher: ', highestNumber, handId, handInPlay.cards);
               highestHand = handInPlay.cards.find((ele, i) => {
                 ele.rank === rank;
                 return ele;

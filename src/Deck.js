@@ -1,4 +1,5 @@
-/* eslint-disable no-console */
+
+/* eslint-disable no-console, no-undef, no-unused-vars */
 
 class Card {
   constructor(dealtCard) {
@@ -47,7 +48,7 @@ export default class Deck {
     let playerId = 0;
     const dealtArray = Array.from({ length: numRanks }, (x, i) => []);
     let numHands = numRanks;
-    let numPersons = numPlayers;
+    // let numPersons = numPlayers;
 
     function* handIds() {
       if (playerId < numPersons) {
@@ -64,7 +65,7 @@ export default class Deck {
         yield playerId++;
       } else {
         playerId = 0;
-        yield playerId;
+        yield playerId++;
       }
     }
 
@@ -75,10 +76,10 @@ export default class Deck {
         rank: card.rank,
         suit: card.suit
       };
+
       const handObj = new Card(hand).makeCard();
       dealtArray[hand.handId].push(handObj);
     });
-    // console.log('dealtArray: ', dealtArray);
     return dealtArray;
   }
 

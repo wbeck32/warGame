@@ -45,6 +45,9 @@ describe('deck test', () => {
   it('should create enough cards to deal evenly', () => {
 
   });
+  it('should not create more than 52 cards', () => {
+
+  });
 });
 describe('card test', () => {
 

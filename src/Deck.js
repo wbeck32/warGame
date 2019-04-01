@@ -72,7 +72,6 @@ export default class Deck {
     }
 
     dealStack.forEach((card) => {
-      console.log('card: ', card);
       const hand = {
         handId: handIds().next().value,
         playerId: playerIds().next().value,
@@ -82,12 +81,12 @@ export default class Deck {
       const handObj = new Card(hand).makeCard();
       dealtArray[hand.handId].push(handObj);
     });
-    // console.log('dealtArray: ', dealtArray);
     return dealtArray;
   }
 
-  createDeck(numRanks, numSuits) {
-    const { deck } = this;
+  createDeck() {
+    // TODO: make sure there are enough cards so no player has more than one card more or less than the others
+    const { deck, numPlayers, numRanks, numSuits } = this;
     const allSuits = ['clubs', 'diamonds', 'hearts', 'spades'];
     const suits = allSuits.slice(0, numSuits);
     const intialDeck = Array.from({ length: numRanks }, (v, i) => i + 1);

@@ -10,12 +10,12 @@ There are still some TODOs in the code. The biggest one is that my dealing algor
 
 To try it:
 
-```git clone https://github.com/wbeck32/warGame.git```
+`git clone https://github.com/wbeck32/warGame.git`
 
 then
 
-```npm install```
+`npm install`
 
 to build the app and run the tests use
 
-```npm start```
+`npm start`

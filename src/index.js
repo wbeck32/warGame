@@ -93,12 +93,10 @@ export default class War {
             };
             return handInPlay;
           });
-          console.log('handInPlay: ', handInPlay);
         }
-        // return handInPlay;
-        // console.log("======handInPlay======");
-        // console.log(handInPlay);
-        // console.log("======handInPlay======");
+        console.log("======handInPlay======");
+        console.log(handInPlay);
+        console.log("======handInPlay======");
         const { handId, players, cards, isSubHand } = handInPlay;
         // console.log('players, cards: ', players, cards, isSubHand);
         let { highestNumber, highestHand } = handInPlay;

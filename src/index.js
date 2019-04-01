@@ -64,6 +64,7 @@ export default class War {
           const cards = [];
           match.forEach((elemen) => {
             if (match[0].rank === elemen.rank && match[0].handId === elemen.handId) {
+              console.log('it is a match: ', elemen.handId, elemen.playerId, elemen.rank);
               players.push(elemen.playerId);
               cards.push({ rank: elemen.rank, suit: elemen.suit });
               handInPlay = {
@@ -74,13 +75,14 @@ export default class War {
                 highestHand: {},
                 isSubHand: true
               };
-              return handInPlay;
             }
+            return handInPlay;
           });
         } else {
           const players = [];
           const cards = [];
           v.filter((item) => {
+            console.log('it is not a match: ', item.handId, item.playerId, item.rank);
             players.push(item.playerId);
             cards.push({ rank: item.rank, suit: item.suit });
             handInPlay = {
@@ -94,27 +96,29 @@ export default class War {
             return handInPlay;
           });
         }
-        console.log("======handInPlay======");
-        console.log(handInPlay);
-        console.log("======handInPlay======");
+
         const { handId, players, cards, isSubHand } = handInPlay;
-        // console.log('players, cards: ', players, cards, isSubHand);
         let { highestNumber, highestHand } = handInPlay;
 
-        cards.forEach((card, kijihih) => {
-          // console.log('card: ', card, highestNumber, highestHand);
+        cards.filter((card, index) => {
+          // console.log('players: ', players);
+          // console.log('cards: ', cards);
+          // console.log('card, index: ', card, index);
+
           const { rank } = card;
           if (rank > highestNumber) {
-            // console.log('rank is higher: ', rank, handId, isSubHand);
-            highestHand === hand;
+            console.log('rank is higher: ', rank, handId);
+            console.log('handInPlay: ', handInPlay.cards);
+            highestHand = card;
             highestNumber = rank;
           } else if (highestNumber > rank) {
-            // console.log('highestNumber is higher: ', highestNumber, handId, isSubHand);
-            highestHand = hand;
-            //   // highestNumber;
+            console.log('highestNumber is higher: ', highestNumber, handId);
+            highestHand = card[rank] === rank;
             // }
           }
         });
+        // console.log('highestNumber, highestHand: ', highestNumber, highestHand);
+
         // console.log('handId: ', handId, 'playerId: ', playerId, 'rank:', rank, 'hN: ', highestNumber);
       }, 0);
     }, 0);

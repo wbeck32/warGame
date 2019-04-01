@@ -47,8 +47,8 @@ export default class Deck {
 
     let handId = 0;
     let playerId = 0;
-    const dealtArray = Array.from({ length: numPlayers }, (x, i) => []);
-    // let numHands = numRanks;
+    const dealtArray = Array.from({ length: numRanks }, (x, i) => []);
+    let numHands = numRanks;
     let numPersons = numPlayers;
 
     function* handIds() {
@@ -71,8 +71,6 @@ export default class Deck {
     }
 
     dealStack.forEach((card) => {
-      // handId = 0-5
-      // playerId = 0-3
       const hand = {
         handId: handIds().next().value,
         playerId: playerIds().next().value,
@@ -80,11 +78,9 @@ export default class Deck {
         suit: card.suit
       };
       const handObj = new Card(hand).makeCard();
-      console.log('handObj: ', handObj, hand.handId);
-      console.log('dealtArray[hand.handId]: ', dealtArray[hand.handId]);
       dealtArray[hand.handId].push(handObj);
     });
-    console.log('dealtArray: ', dealtArray);
+    // console.log('dealtArray: ', dealtArray);
     return dealtArray;
   }
 
